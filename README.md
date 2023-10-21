@@ -117,9 +117,54 @@ model Issue {
 
 - `npx prisma db push` - it sync the schema with our database (creating database and table)
 
-git add .
-git commit -m "setup prisma and model"
-git push
+`git add .`
+`git commit -m "setup prisma and model"`
+`git push`
+
+**Building an API**
+
+- app>api>issues>route.tsx
+- add api code to post method.
+- install zod for data validation
+- to store data(issue) we need to create prisma client.
+- in prisma>client.ts (`add the code from nextjs-prisma client documentation`)
+
+```javascript
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/prisma/client';
+
+import { z } from 'zod';
+const createIssueSchema = z.object({
+  title: z.string().min(3).max(255),
+  description: z.string().min(1),
+});
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const validation = createIssueSchema.safeParse(body);
+  if (!validation.success) {
+    return NextResponse.json(validation.error.errors, { status: 400 });
+  }
+
+  const newIssue = await prisma.issue.create({
+    data: { title: body.title, description: body.description },
+  });
+
+  return NextResponse.json(newIssue, { status: 201 });
+}
+```
+
+**Setting up Redix UI**
+
+- To build the new issue page we will use radix UI, very popular component library.
+- Radix comes in to flavour, Themes and Primitives, themes have pre build component ready to use, where Primitives have only behaviour, and we have to style ourself.
+- step1 `npm install @radix-ui/themes`
+
+- step2 `import '@radix-ui/themes/styles.css;`
+
+- step3 ` Add the Theme component`
+
+[install Radix](https://www.radix-ui.com/themes/docs/overview/getting-started)
 
 # 4. Viewing Issues (54m)
 
