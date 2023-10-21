@@ -166,6 +166,15 @@ export async function POST(request: NextRequest) {
 
 [install Radix](https://www.radix-ui.com/themes/docs/overview/getting-started)
 
+- import Button component in issue page and test.
+  `git add . //  git commit -m "setup radix ui" // git push`
+
+  **Building the new issue page**
+
+  - In this section we are just going to build the form with two filed, title and description.
+  - issues>new>page.tsx
+  - add the form from radix ui.
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
