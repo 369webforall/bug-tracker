@@ -175,6 +175,26 @@ export async function POST(request: NextRequest) {
   - issues>new>page.tsx
   - add the form from radix ui.
 
+  ```javascript
+  'use client';
+  import React from 'react';
+  import { TextField, TextArea, Button } from '@radix-ui/themes';
+  const NewIssuePage = () => {
+    return (
+      <div className="max-w-xl space-y-4">
+        <TextField.Root>
+          <TextField.Input placeholder="Title" />
+        </TextField.Root>
+        <TextArea placeholder="Description" />
+        <Button>Submit New Issue</Button>
+      </div>
+    );
+  };
+  export default NewIssuePage;
+  ```
+
+- add button to navigate the NewIssuePage
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
@@ -190,3 +210,7 @@ export async function POST(request: NextRequest) {
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
