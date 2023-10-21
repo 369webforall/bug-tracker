@@ -195,6 +195,11 @@ export async function POST(request: NextRequest) {
 
 - add button to navigate the NewIssuePage
 
+**Customizing radix ui theme**
+
+- ThemePanle to change the theme.
+- Also fix the inter font to work with radix ui.
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
