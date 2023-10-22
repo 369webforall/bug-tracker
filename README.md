@@ -380,6 +380,28 @@ export default NewIssuePage;
 
 - now we can get formState object, destructure to errors object which has property for title and description.
 
+**Extract the error message component**
+
+```javascript
+import { Text } from '@radix-ui/themes';
+import React, { PropsWithChildren } from 'react';
+
+const ErrorMessage = ({ children }: PropsWithChildren) => {
+  if (!children) return null;
+  return (
+    <Text as="p" color="red">
+      {children}
+    </Text>
+  );
+};
+
+export default ErrorMessage;
+```
+
+**Adding a spinner**
+
+- To improve user experience we want to add the spinner when submitting the form.
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
