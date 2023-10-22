@@ -792,6 +792,19 @@ export default NewIssuePage;
 ```
 
 - **10-Refactoring-Organizing Imports**
+- go to component folder and add index.ts
+- import all the component here.
+
+```javaScript
+
+export { default as Link } from './Link';
+export { default as Spinner } from './Spinner';
+export { default as IssueStatusBadge } from './IssueStatusBadge';
+export { default as ErrorMessage } from './ErrorMessage';
+
+export { default as Skeleton } from './Skeleton';
+
+```
 
 # 5. Updating Issues (60m)
 
