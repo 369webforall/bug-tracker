@@ -402,6 +402,37 @@ export default ErrorMessage;
 
 - To improve user experience we want to add the spinner when submitting the form.
 
+[react spinner elements](https://tw-elements.com/docs/standard/components/spinners/)
+
+```javascript
+import React from 'react';
+
+const Spinner = () => {
+  return (
+    <div
+      className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+    </div>
+  );
+};
+
+export default Spinner;
+```
+
+- import to page.tsx add to the Button component.
+- useState hook to maintain the state for displaying the spinner when submitting the form.
+
+**code organization**
+
+- when creating the issue we may move the code in seperate file, but we only have one place creating the issue so for now let's keep it there
+  // createIssue(data)
+
+-
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
