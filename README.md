@@ -554,6 +554,37 @@ export default LoadingIssuePage;
 - we can move the button to seperate componet so it can be used in different component inside issues.
 
 **4-Showing Issues Details**
+
+- let's add [id]>page.tsx
+
+```javascript
+import React from 'react';
+import prisma from '@/prisma/client';
+import { notFound } from 'next/navigation';
+
+interface Props {
+  params: { id: string };
+}
+const IssueDetailPage = async ({ params }: Props) => {
+  const issue = await prisma.issue.findUnique({
+    where: { id: params.id },
+  });
+
+  if (!issue) notFound();
+
+  return (
+    <div>
+      <p>{issue.title}</p>
+      <p>{issue.description}</p>
+      <p>{issue.status}</p>
+      <p>{issue.createdAt.toDateString()}</p>
+    </div>
+  );
+};
+
+export default IssueDetailPage;
+```
+
 **5-Styling the Issue Details Page**
 **6-Adding Markdown Preview**
 **7-Building the Styled Link Component**
