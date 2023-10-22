@@ -439,9 +439,9 @@ export default Spinner;
 
 - show the issue, in issue page. import prisma,
   `prisma.issue.findMany()`
-- use Table component
-- map throuhg the issues and display the issue
-- also hide staus and issueDate in in mobile.
+- use Table component from Radix UI
+- map through the issues and display the issue
+- also hide status and issueDate in mobile.
 - add div block to display the status on mobile.
 
 **2-Building the issues Status Badge**
@@ -483,6 +483,75 @@ export default IssueStatusBadge;
 ```
 
 **3-Adding Loading Skeltons**
+
+- To imporve the user experience, let's add the loading skelton.
+- when someone visit the site, while data is loading, user can see the skelton of the page.
+
+- In issue folder add loading.tsx
+- we can install delay package to delay the page loading so that we can see it clearly.
+
+`npm i delay`
+
+`import delay from 'delay`
+
+- right after data is fetch, we can add delay(2000)
+
+- To add the modern loading skelton, React Loading Skeleton package we will use.
+
+`npm i react-loading-skeleton`
+
+```javascript
+import { Table } from '@radix-ui/themes';
+import React from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
+import IssueActions from './IssueActions';
+const issues = [1, 2, 3, 4, 5, 6];
+const LoadingIssuePage = () => {
+  return (
+    <div>
+      <IssueActions />
+
+      <Table.Root variant="surface">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Status
+            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Created
+            </Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {issues.map((issue) => (
+            <Table.Row key={issue}>
+              <Table.Cell>
+                <Skeleton />
+                <div className="block md:hidden">
+                  <Skeleton />
+                </div>
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <Skeleton />
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <Skeleton />
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    </div>
+  );
+};
+
+export default LoadingIssuePage;
+```
+
+- we can move the button to seperate componet so it can be used in different component inside issues.
 
 **4-Showing Issues Details**
 **5-Styling the Issue Details Page**
