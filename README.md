@@ -431,9 +431,21 @@ export default Spinner;
 - when creating the issue we may move the code in seperate file, but we only have one place creating the issue so for now let's keep it there
   // createIssue(data)
 
--
+- move the inline function.
 
 # 4. Viewing Issues (54m)
+
+**1-Showing the issues**
+
+**2-Building the issues Status Badge**
+**3-Adding Loading Skeltons**
+**4-Showing Issues Details**
+**5-Styling the Issue Details Page**
+**6-Adding Markdown Preview**
+**7-Building the Styled Link Component**
+**8-Additional Loading Skeltons**
+**9-Disabling Server-side rendering**
+**10-Refactoring-Organizing Imports**
 
 # 5. Updating Issues (60m)
 
