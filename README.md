@@ -200,6 +200,17 @@ export async function POST(request: NextRequest) {
 - ThemePanle to change the theme.
 - Also fix the inter font to work with radix ui.
 
+**Adding a Markdown editor**
+
+- now let's replace textarea filed with markdown component.
+- for this we are going to use `react-simplemde-editor`
+  [React SimpleMDE (EasyMDE) Markdown Editor](https://www.npmjs.com/package/react-simplemde-editor)
+
+  - install `npm install --save react-simplemde-editor easymde`
+  - now to use this component, import
+    `import SimpleMDE from "react-simplemde-editor";`
+    `import "easymde/dist/easymde.min.css";`
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
