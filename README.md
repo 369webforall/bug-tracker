@@ -211,6 +211,8 @@ export async function POST(request: NextRequest) {
     `import SimpleMDE from "react-simplemde-editor";`
     `import "easymde/dist/easymde.min.css";`
 
+- Replace TextArea field with SimpleMDE component.
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
