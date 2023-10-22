@@ -457,10 +457,29 @@ const IssueStatusBadge = ({ status }: { status: Status }) => {
 };
 ```
 
-- second approach using Record, utility type in TypeScript which allow us to define key value pair.
+- Second approach using Record, utility type in TypeScript which allows us to define a key value pair.
 
 ```javascript
-code;
+import { Status, Issue } from '@prisma/client';
+import { Badge } from '@radix-ui/themes';
+import React from 'react';
+
+const statusMap: Record<
+  Status,
+  { label: string, color: 'red' | 'violet' | 'green' }
+> = {
+  OPEN: { label: 'Open', color: 'red' },
+  IN_PROGRESS: { label: 'In Progress', color: 'violet' },
+  CLOSE: { label: 'Closed', color: 'green' },
+};
+
+const IssueStatusBadge = ({ status }: { status: Status }) => {
+  return (
+    <Badge color={statusMap[status].color}>{statusMap[status].label}</Badge>
+  );
+};
+
+export default IssueStatusBadge;
 ```
 
 **3-Adding Loading Skeltons**
