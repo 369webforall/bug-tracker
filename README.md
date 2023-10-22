@@ -358,6 +358,28 @@ export default NewIssuePage;
 
 ```
 
+**Implementing client side valiation**
+
+- We have schema for validating our Object in route.tsx file, so it would be nice if we use the same shcema also in client side.
+
+- let's extract this logic in seperate module, so we can use it in two different places.
+
+- right click on createIssueSchema and click Refactor.
+
+- move the file to app directory.
+- change the name to more general name like `validationSchema`
+
+- now to use the schema, install the package called `@hookform/resolver`
+  `npm i @hookform/resolvers`
+
+  `import { zodResolver } from '@hookform/resolvers/zod';`
+
+  - also update the interfce, we already have type check in zod
+    `import {z} from 'zod'`
+    `type IssueForm = z.infer<typeof createIssueSchema>;`
+
+- now we can get formState object, destructure to errors object which has property for title and description.
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
