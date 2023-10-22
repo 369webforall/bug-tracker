@@ -1,7 +1,9 @@
 'use client';
+
 import { useState } from 'react';
-import { TextField, Button, Callout, Text } from '@radix-ui/themes';
-import SimpleMDE from 'react-simplemde-editor';
+import { TextField, Button, Callout } from '@radix-ui/themes';
+// import SimpleMDE from 'react-simplemde-editor';
+import dynamic from 'next/dynamic';
 import 'easymde/dist/easymde.min.css';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
@@ -16,7 +18,9 @@ import Spinner from '@/app/components/Spinner';
 //   title: string;
 //   description: string;
 // }
-
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+  ssr: false,
+});
 type IssueForm = z.infer<typeof createIssueSchema>;
 const NewIssuePage = () => {
   const {
