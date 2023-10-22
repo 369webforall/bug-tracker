@@ -695,8 +695,17 @@ export default Link;
 ```
 
 **8-Additional Loading Skeltons**
-**9-Disabling Server-side rendering**
-**10-Refactoring-Organizing Imports**
+
+- copy the code from issuedetail page and add in loading file.
+- fix all the import.
+- Add Box component form Radix UI.
+  `import Skeleton from 'react-loading-skeleton'`
+  `import 'react-loading-skeleton/dist/skeleton.css'`
+
+  - add Skeleton componet in loading file, form loading and also for issueDetailspage loading.
+
+  **9-Disabling Server-side rendering**
+  **10-Refactoring-Organizing Imports**
 
 # 5. Updating Issues (60m)
 
