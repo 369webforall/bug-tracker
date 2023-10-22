@@ -287,6 +287,77 @@ export async function POST(request: NextRequest) {
   export default NewIssuePage;
   ```
 
+**Handling Errors**
+
+- currently our code doen't have error handling, so next thing what we want to do is handle the potential error and provide the feedback to the user if something goes wrong.
+- add `try catch` block;
+
+- we can also format the error `return NextResponse.json(validation.error.format(), { status: 400 });`
+
+- we can also provide the custom error message.
+- This will be usefull if you want to handle error in server, for example in registraion form , user must select unique username.
+
+- now we need to display the error in client page.
+- `useState` hook to store the error.
+
+- now let's use one of the component from Radix ui `callout` to display the error.
+
+```javascript
+'use client';
+import { useState } from 'react';
+import { TextField, Button, Callout } from '@radix-ui/themes';
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+interface IssueForm {
+  title: string;
+  description: string;
+}
+const NewIssuePage = () => {
+  const { register, control, handleSubmit } = useForm<IssueForm>();
+  const router = useRouter();
+  const [error, setError] = useState('');
+
+  return (
+    <div className="max-w-xl">
+      {error && (
+        <Callout.Root color='red' className='mb-5'>
+          <Callout.Text>{error}</Callout.Text>
+        </Callout.Root>
+      )}
+      <form className='space-y-4'
+        onSubmit={handleSubmit(async (data) => {
+          try {
+            await axios.post('/api/issues', data);
+            router.push('/issues');
+          } catch (error) {
+            setError('An unexpected error occurred');
+          }
+        })}
+      >
+        <TextField.Root>
+          <TextField.Input placeholder='Title' {...register('title')} />
+        </TextField.Root>
+        <Controller
+          name='description'
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder='Description' {...field} />
+          )}
+        />
+
+        <Button>Submit New Issue</Button>
+      </form>
+    </div>
+  );
+};
+
+export default NewIssuePage;
+
+```
+
 # 4. Viewing Issues (54m)
 
 # 5. Updating Issues (60m)
