@@ -437,8 +437,34 @@ export default Spinner;
 
 **1-Showing the issues**
 
+- show the issue, in issue page. import prisma,
+  `prisma.issue.findMany()`
+- use Table component
+- map throuhg the issues and display the issue
+- also hide staus and issueDate in in mobile.
+- add div block to display the status on mobile.
+
 **2-Building the issues Status Badge**
+
+- Now let's add the beautiful badge componet from Radix ui for our status.
+- first approach
+
+```javascript
+const IssueStatusBadge = ({ status }: { status: Status }) => {
+  if (status === 'OPEN') return <Badge color="red">Open</Badge>;
+  if (status === 'IN_PROGRESS') return <Badge color="violet">Open</Badge>;
+  if (status === 'CLOSE') return <Badge color="orange">Open</Badge>;
+};
+```
+
+- second approach using Record, utility type in TypeScript which allow us to define key value pair.
+
+```javascript
+code;
+```
+
 **3-Adding Loading Skeltons**
+
 **4-Showing Issues Details**
 **5-Styling the Issue Details Page**
 **6-Adding Markdown Preview**
