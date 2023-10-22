@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Heading, Flex, Card } from '@radix-ui/themes';
 import IssueStatusBadge from '@/app/components/IssueStatusBadge';
 import ReactMarkdown from 'react-markdown';
+
 interface Props {
   params: { id: string };
 }

@@ -670,6 +670,30 @@ export default IssueDetailPage;
 ```
 
 **7-Building the Styled Link Component**
+
+- either we can add some style to title link, so when hover styles changed
+- or let's build the custom Link componet and use Radix Link for style.
+
+```javascript
+import React from 'react';
+import { Link as RadixLink } from '@radix-ui/themes';
+import NextLink from 'next/link';
+
+interface Props {
+  href: string;
+  children: string;
+}
+const Link = ({ href, children }: Props) => {
+  return (
+    <NextLink href={href} passHref legacyBehavior>
+      <RadixLink>{children}</RadixLink>
+    </NextLink>
+  );
+};
+
+export default Link;
+```
+
 **8-Additional Loading Skeltons**
 **9-Disabling Server-side rendering**
 **10-Refactoring-Organizing Imports**
