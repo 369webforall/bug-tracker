@@ -202,8 +202,8 @@ export async function POST(request: NextRequest) {
 
 **Adding a Markdown editor**
 
-- now let's replace textarea filed with markdown component.
-- for this we are going to use `react-simplemde-editor`
+- Now let's replace textarea filed with markdown component.
+- For this we are going to use `react-simplemde-editor`
   [React SimpleMDE (EasyMDE) Markdown Editor](https://www.npmjs.com/package/react-simplemde-editor)
 
   - install `npm install --save react-simplemde-editor easymde`
@@ -212,6 +212,80 @@ export async function POST(request: NextRequest) {
     `import "easymde/dist/easymde.min.css";`
 
 - Replace TextArea field with SimpleMDE component.
+
+**Handling form submission**
+
+- our Form is ready now its time to handle the form submission, we are going to use very popular library call `React Hook Form`
+
+- install `npm install react-hook-form`
+
+- `import { useForm } from "react-hook-form"`
+
+- Next we define the interface of our form, basically the shape of our form (all the fields)
+- Call the function useForm, which return objects, destructure it.
+  `const {register} = useForm<IssueForm>()`
+
+  - {...register('title')} // because we saw in console log. it reutn object with 4 properties. that's why we must destructure it.
+
+- This technique will not work with simpleMDE
+
+  - We need to use the controller component.
+  - First we render the controller component then pass the SimpleMDE component to controller component as props.
+
+  ```javascript
+  <Controller
+    name="description"
+    control={control}
+    render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
+  />
+  ```
+
+- next we need to submit form, handleSubmit
+
+- install axios to connect with our api. (POST)
+  `npm i axios`
+
+  ```javascript
+  'use client';
+  import { TextField, Button } from '@radix-ui/themes';
+  import SimpleMDE from 'react-simplemde-editor';
+  import 'easymde/dist/easymde.min.css';
+  import { useForm, Controller } from 'react-hook-form';
+  import axios from 'axios';
+  import { useRouter } from 'next/navigation';
+  interface IssueForm {
+  title: string;
+  description: string;
+  }
+  const NewIssuePage = () => {
+  const { register, control, handleSubmit } = useForm<IssueForm>();
+  const router = useRouter();
+
+  return (
+    <form
+      className="max-w-xl space-y-4"
+      onSubmit={handleSubmit(async (data) => {
+        await axios.post('/api/issues', data);
+        router.push('/issues');
+      })}
+    >
+      <TextField.Root>
+        <TextField.Input placeholder="Title" {...register('title')} />
+      </TextField.Root>
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <SimpleMDE placeholder="Description" {...field} />
+        )}
+      />
+
+      <Button>Submit New Issue</Button>
+    </form>
+  );
+  };
+  export default NewIssuePage;
+  ```
 
 # 4. Viewing Issues (54m)
 
@@ -228,6 +302,10 @@ export async function POST(request: NextRequest) {
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
 
 ```
 
