@@ -936,8 +936,14 @@ export async function PATCH(
 ```
 
 **5. Updating Issues**
-**6. Understanding Caching**
-**7. Improving the Loading Experience**
+
+- We build the api now it's time to update our form.
+- in form, check if there is issue then update the data axios.patch() else axios.put()
+- add the respective api route.
+- Also dinamically display the text in submit button.
+
+  **6. Understanding Caching**
+  **7. Improving the Loading Experience**
 
 # 6. Deleting Issues (40m)
 
