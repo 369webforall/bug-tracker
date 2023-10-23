@@ -881,10 +881,63 @@ export { default as Skeleton } from './Skeleton';
   **3. Building the Edit Issue page**
 
   - here we will build the edit issue page. we need to reuse the form, so let's add componets folder in issue, so we can add the the component which we think only needed in issue.
-  - **4. Building an API**
-    **5. Updating Issues**
-    **6. Understanding Caching**
-    **7. Improving the Loading Experience**
+
+  - fetch the issue with id in IssueForm and pass as props.
+
+  - edit>page.tsx
+
+```javascript
+import React from 'react';
+import IssueForm from '../../_components/IssueForm';
+import prisma from '@/prisma/client';
+import { notFound } from 'next/navigation';
+
+const EditIssuePage = async ({ params }: { params: { id: string } }) => {
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+
+  if (!issue) notFound();
+  return <IssueForm issue={issue} />;
+};
+
+export default EditIssuePage;
+```
+
+- **4. Building an API**
+- add api/issues/[id]/route.ts
+
+```javascript
+import { issueSchema } from '@/app/validationSchema';
+import prisma from '@/prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const body = await request.json();
+  const validation = issueSchema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json(validation.error.format(), { status: 400 });
+
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+  if (!issue)
+    return NextResponse.json({ error: 'Invalid issue' }, { status: 404 });
+
+  const updatedIssue = await prisma.issue.update({
+    where: { id: issue.id },
+    data: {
+      title: body.title,
+      description: body.description,
+    },
+  });
+
+  return NextResponse.json(updatedIssue);
+}
+```
+
+**5. Updating Issues**
+**6. Understanding Caching**
+**7. Improving the Loading Experience**
 
 # 6. Deleting Issues (40m)
 
