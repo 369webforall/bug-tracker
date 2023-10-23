@@ -808,6 +808,18 @@ export { default as Skeleton } from './Skeleton';
 
 # 5. Updating Issues (60m)
 
+**1. Adding the Edit Button**
+
+- In this section we just focus on adding an Edit Button
+- We convert the [id] page into gird layout with two children.
+
+**2. Applying the single Responsibility principle**
+**3. Building the Edit Issue page**
+**4. Building an API**
+**5. Updating Issues**
+**6. Understanding Caching**
+**7. Improving the Loading Experience**
+
 # 6. Deleting Issues (40m)
 
 # 7. Authentication (51m)
