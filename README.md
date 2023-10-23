@@ -811,14 +811,71 @@ export { default as Skeleton } from './Skeleton';
 **1. Adding the Edit Button**
 
 - In this section we just focus on adding an Edit Button
-- We convert the [id] page into gird layout with two children.
+- In [id] folder let's go to the page. replace div with Grid component and add two column form Radix UI.
 
-**2. Applying the single Responsibility principle**
-**3. Building the Edit Issue page**
-**4. Building an API**
-**5. Updating Issues**
-**6. Understanding Caching**
-**7. Improving the Loading Experience**
+- Make grid column responsive by adding breakpoint for Radix UI ( columns: {initial: '1', md:'2'})
+
+- gap-5
+- Install icons from radix ui
+  `npm i @radix-ui/react-icons`
+
+  - search pencil icon (Pencil 2)
+
+  ```javascript
+  import React from 'react';
+  import prisma from '@/prisma/client';
+  import { notFound } from 'next/navigation';
+  import { Heading, Flex, Card, Grid, Box, Button } from '@radix-ui/themes';
+  import IssueStatusBadge from '@/app/components/IssueStatusBadge';
+  import ReactMarkdown from 'react-markdown';
+  import { Pencil2Icon } from '@radix-ui/react-icons';
+  import Link from 'next/link';
+  interface Props {
+    params: { id: string };
+  }
+  const IssueDetailPage = async ({ params }: Props) => {
+    const issue = await prisma.issue.findUnique({
+      where: { id: params.id },
+    });
+
+    if (!issue) notFound();
+
+    return (
+      <Grid columns={{ initial: '1', md: '2' }} gap="5">
+        <Box>
+          <Heading>{issue.title}</Heading>
+          <Flex className="space-x-3" my="2">
+            <IssueStatusBadge status={issue.status} />
+
+            <p>{issue.createdAt.toDateString()}</p>
+          </Flex>
+          <Card className="prose" mt="4">
+            <ReactMarkdown>{issue.description}</ReactMarkdown>
+          </Card>
+        </Box>
+        <Box>
+          <Button>
+            <Pencil2Icon />
+            <Link
+              href={`/issues/${issue.id}/edit`}
+              className="flex gap-2 items-center"
+            >
+              Edit Issue
+            </Link>
+          </Button>
+        </Box>
+      </Grid>
+    );
+  };
+  export default IssueDetailPage;
+  ```
+
+  **2. Applying the single Responsibility principle**
+  **3. Building the Edit Issue page**
+  **4. Building an API**
+  **5. Updating Issues**
+  **6. Understanding Caching**
+  **7. Improving the Loading Experience**
 
 # 6. Deleting Issues (40m)
 
@@ -831,6 +888,10 @@ export { default as Skeleton } from './Skeleton';
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
 
 ```
 
