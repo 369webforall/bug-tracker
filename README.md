@@ -871,6 +871,13 @@ export { default as Skeleton } from './Skeleton';
   ```
 
   **2. Applying the single Responsibility principle**
+
+  - Software entities should have a single responsibility.
+  - let's apply this principle in issueDetailPage
+  - If we look at the details of this page, it should have only layout, two column grid layout.
+  - first create EditIssueButton and move the button code.
+  - second create IssueDetails page and move the details code here.
+
   **3. Building the Edit Issue page**
   **4. Building an API**
   **5. Updating Issues**
