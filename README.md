@@ -879,10 +879,12 @@ export { default as Skeleton } from './Skeleton';
   - second create IssueDetails page and move the details code here.
 
   **3. Building the Edit Issue page**
-  **4. Building an API**
-  **5. Updating Issues**
-  **6. Understanding Caching**
-  **7. Improving the Loading Experience**
+
+  - here we will build the edit issue page. we need to reuse the form, so let's add componets folder in issue, so we can add the the component which we think only needed in issue.
+  - **4. Building an API**
+    **5. Updating Issues**
+    **6. Understanding Caching**
+    **7. Improving the Loading Experience**
 
 # 6. Deleting Issues (40m)
 
