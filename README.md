@@ -957,15 +957,15 @@ export async function PATCH(
 - ` fetch('...', {cache:'no-store'})`
 - `fetch('...', {next: {revalidate: 3600}})`
 
-  2. FullRoute cache (cache on server)
+2.  Full Route cache (cache on server)
 
-  - Used to store the staticaly rendered routes.
-    Redering
-    a. Static (biuild time)
+- Used to store the statically rendered routes.
+  ordering
+  a. Static (build time)
 
-- Routes with no parameter are consider static routes
+- Routes with no parameter are considered static routes
 
-- To change the static route to dynamic apply
+- To change the static route to dynamic applies
   `export const revalidate = 0;`
   or
   `export const dynamic = 'force-dynamic;`
@@ -975,17 +975,19 @@ b. Dynamic (request time)
 - Routes with parameters as dynamic route.
 
 3. Router cache (client-side cache)
-   (Data stored in browser)
+   (Data stored in the browser)
 
 - Store the payload of page in browsers
 - Last for a session
 - Get refreshed when page reload
-- after 5 min data reload.
+- After 5 min data reload.
 
-- we can add the page to reload when data is created.
+- We can add the page to reload when data is created.
   `router.refresh()`
 
-       **7. Improving the Loading Experience**
+**7. Improving the Loading Experience**
+
+-Improve the loading experience by adding dynamic loading. And refactoring the code.
 
 # 6. Deleting Issues (40m)
 

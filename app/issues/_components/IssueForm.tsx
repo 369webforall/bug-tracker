@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { TextField, Button, Callout } from '@radix-ui/themes';
-
-import dynamic from 'next/dynamic';
 import 'easymde/dist/easymde.min.css';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
@@ -13,14 +11,13 @@ import { issueSchema } from '@/app/validationSchema';
 import { z } from 'zod';
 import { ErrorMessage, Spinner } from '@/app/components';
 import { Issue } from '@prisma/client';
+import SimpleMDE from 'react-simplemde-editor';
 
 // interface IssueForm {
 //   title: string;
 //   description: string;
 // }
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
-  ssr: false,
-});
+
 type IssueFormData = z.infer<typeof issueSchema>;
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
