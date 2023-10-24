@@ -943,7 +943,49 @@ export async function PATCH(
 - Also dinamically display the text in submit button.
 
   **6. Understanding Caching**
-  **7. Improving the Loading Experience**
+
+  - In Nextjs there is three cache layer
+
+  1. Datacache
+
+  - When we fetch data from external source using fetch() api, nextjs store the result in data cache.
+  - This data cache stored in file system.
+  - It is permanent until we redeploy our application.
+  - So next time when we request the data, nextjs not go over the network, it will just return the datacache file.
+
+- `we can disable data cache or revalidate after certain time`
+- ` fetch('...', {cache:'no-store'})`
+- `fetch('...', {next: {revalidate: 3600}})`
+
+  2. FullRoute cache (cache on server)
+
+  - Used to store the staticaly rendered routes.
+    Redering
+    a. Static (biuild time)
+
+- Routes with no parameter are consider static routes
+
+- To change the static route to dynamic apply
+  `export const revalidate = 0;`
+  or
+  `export const dynamic = 'force-dynamic;`
+
+b. Dynamic (request time)
+
+- Routes with parameters as dynamic route.
+
+3. Router cache (client-side cache)
+   (Data stored in browser)
+
+- Store the payload of page in browsers
+- Last for a session
+- Get refreshed when page reload
+- after 5 min data reload.
+
+- we can add the page to reload when data is created.
+  `router.refresh()`
+
+       **7. Improving the Loading Experience**
 
 # 6. Deleting Issues (40m)
 
