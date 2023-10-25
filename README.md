@@ -1,3 +1,7 @@
+# Video
+
+[class-1](https://youtu.be/M0Fsrt9V9HE)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
@@ -51,19 +55,23 @@ By the end of the course everyone should be confident in building fast, responsi
 **Important Point to remember**
 
 - When we are building this application we are going to focus one feature at a time.
-- When building feature, our goal is not to come with perfect solutin, first we build the working feature, then improve the code.
+- When building feature, our goal is not to come with perfect solution, first we build the working feature, then improve the code.
 
 **there is no such thing as `Perfect in software development`**
 `Make it first work and improve it`
 
 # 2. Setting Up the Project (45m)
 
-- create new github repo issue-tracker
+- create new github repository issue-tracker
 - clone
+  window>`git clone https://github.com/369webforall/bug-tracker.git`
+
 - open in vscode (add extension ES7+React/redux/ Tailwind css intellisent / Prisma / Javascript/Typescript)
 
 - install next-js, with typescript and tailwind css
   `npx create-next-app@latest ./`
+
+- clean the code.
 
 git add .
 git commit -m "project setup"
@@ -73,7 +81,7 @@ git push
 
 - crate NavBar.tsx file in app directory
 
-- install react-icons (`napm i react-icons`)
+- install react-icons (`npm i react-icons`)
 - install classnames (`npm i classnames`)
 
 - once navbar is complete
