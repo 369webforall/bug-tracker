@@ -999,6 +999,18 @@ b. Dynamic (request time)
 
 # 6. Deleting Issues (40m)
 
+**1- Adding a Delete Button**
+
+- In this section we are going to implete feature for delete issue.
+- Add Delete Button
+
+**2- Adding a Confirmation dialog box**
+**3- Building an API**
+**4- Deleting an Issue**
+**5- Handling Errors**
+**6- Improving the user Experience**
+**7- Removing Duplicate Skeletons**
+
 # 7. Authentication (51m)
 
 # 8. Assigning Issues to Users (48m)
