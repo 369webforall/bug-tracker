@@ -7,11 +7,11 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <Button color="red">Delete Issue</Button>;
+        <Button color="red">Delete Issue</Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content>
         <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
-        {/* <AlertDialog.Description>
+        <AlertDialog.Description>
           Are you sure? This application will no longer be accessible and any
           existing sessions will be expired.
         </AlertDialog.Description>
@@ -24,10 +24,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
           </AlertDialog.Cancel>
           <AlertDialog.Action>
             <Button variant="solid" color="red">
-              Revoke access
+              Delete Issue
             </Button>
           </AlertDialog.Action>
-        </Flex> */}
+        </Flex>
       </AlertDialog.Content>
     </AlertDialog.Root>
   );
