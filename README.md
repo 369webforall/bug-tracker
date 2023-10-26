@@ -1016,10 +1016,30 @@ b. Dynamic (request time)
 **2- Adding a Confirmation dialog box**
 
 - When delete button is clicked we need to show the conformation box.
-- we will use radix ui alert componet.
+- we will use radix ui for alert componet.
 
 **3- Building an API**
+
+- Build API for deleteing issue.
+- api/issues/[id]>route.ts
+
+```javascript
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+  if (!issue)
+    return NextResponse.json({ error: 'Invalid issue' }, { status: 400 });
+
+  await prisma.issue.delete({ where: { id: params.id } });
+
+  return NextResponse.json({ message: 'Issue Deleted' }, { status: 200 });
+}
+```
+
 **4- Deleting an Issue**
+
 **5- Handling Errors**
 **6- Improving the user Experience**
 **7- Removing Duplicate Skeletons**
