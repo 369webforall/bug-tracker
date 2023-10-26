@@ -91,12 +91,12 @@ git push
 
 # 3. Creating Issues (database setup) (80m)
 
-**Database setup**
+**1. Database setup**
 
 - Mongodb
 - create project in mongodb atlas, save password, copy the link of your project.
 
-**setting up prisma and creating the issue model**
+**2. Setting up prisma**
 
 - install prisma (`npm i prisma`)
 - intialize prisma (`npx prisma init`)
@@ -105,6 +105,8 @@ git push
   provider = "mongodb"
   url = env("DATABASE_URL")
   }
+
+**3. Creating the issue model**
 
 - create model as below
 
@@ -120,8 +122,8 @@ model Issue {
 ```
 
 - `npx prisma format` this will format the code
-- `npx prisma generate`
-  (The npx prisma generate command is used to generate the Prisma Client for your Prisma schema. Prisma Client is a TypeScript (or JavaScript) library that provides a type-safe and auto-completing API for interacting with your database. When you run npx prisma generate, Prisma generates the necessary code based on your Prisma schema and the database you're using.)
+
+  (Prisma Client is a TypeScript (or JavaScript) library that provides a type-safe and auto-completing API for interacting with your database. When you run npx prisma generate, Prisma generates the necessary code based on your Prisma schema and the database you're using.)
 
 - `npx prisma db push` - it sync the schema with our database (creating database and table)
 
@@ -129,7 +131,9 @@ model Issue {
 `git commit -m "setup prisma and model"`
 `git push`
 
-**Building an API**
+[Guide Prisma-mongodb](https://www.prisma.io/docs/guides/database/mongodb)
+
+**4. Building an API**
 
 - app>api>issues>route.tsx
 - add api code to post method.
@@ -162,7 +166,7 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-**Setting up Redix UI**
+**5. Setting up Redix UI**
 
 - To build the new issue page we will use radix UI, very popular component library.
 - Radix comes in to flavour, Themes and Primitives, themes have pre build component ready to use, where Primitives have only behaviour, and we have to style ourself.
@@ -177,9 +181,9 @@ export async function POST(request: NextRequest) {
 - import Button component in issue page and test.
   `git add . //  git commit -m "setup radix ui" // git push`
 
-  **Building the new issue page**
+  **6. Building the new issue page**
 
-  - In this section we are just going to build the form with two filed, title and description.
+  - In this section we are just going to build the form with two field, title and description.
   - issues>new>page.tsx
   - add the form from radix ui.
 
@@ -203,12 +207,15 @@ export async function POST(request: NextRequest) {
 
 - add button to navigate the NewIssuePage
 
-**Customizing radix ui theme**
+**7. Customizing radix ui theme**
 
 - ThemePanle to change the theme.
 - Also fix the inter font to work with radix ui.
+- Follow the instruction in below link.
 
-**Adding a Markdown editor**
+[RadixUi-typography](https://www.radix-ui.com/themes/docs/theme/typography)
+
+**8. Adding a Markdown editor**
 
 - Now let's replace textarea filed with markdown component.
 - For this we are going to use `react-simplemde-editor`
@@ -221,7 +228,7 @@ export async function POST(request: NextRequest) {
 
 - Replace TextArea field with SimpleMDE component.
 
-**Handling form submission**
+**9. Handling form submission**
 
 - our Form is ready now its time to handle the form submission, we are going to use very popular library call `React Hook Form`
 
@@ -233,7 +240,7 @@ export async function POST(request: NextRequest) {
 - Call the function useForm, which return objects, destructure it.
   `const {register} = useForm<IssueForm>()`
 
-  - {...register('title')} // because we saw in console log. it reutn object with 4 properties. that's why we must destructure it.
+  - {...register('title')} // because we saw in console log. it return object with 4 properties. that's why we must destructure it.
 
 - This technique will not work with simpleMDE
 
@@ -295,7 +302,7 @@ export async function POST(request: NextRequest) {
   export default NewIssuePage;
   ```
 
-**Handling Errors**
+**10. Handling Errors**
 
 - currently our code doen't have error handling, so next thing what we want to do is handle the potential error and provide the feedback to the user if something goes wrong.
 - add `try catch` block;
@@ -366,7 +373,7 @@ export default NewIssuePage;
 
 ```
 
-**Implementing client side valiation**
+**11. Implementing client side valiation**
 
 - We have schema for validating our Object in route.tsx file, so it would be nice if we use the same shcema also in client side.
 
@@ -388,7 +395,7 @@ export default NewIssuePage;
 
 - now we can get formState object, destructure to errors object which has property for title and description.
 
-**Extract the error message component**
+**12. Extract the error message component**
 
 ```javascript
 import { Text } from '@radix-ui/themes';
@@ -406,7 +413,7 @@ const ErrorMessage = ({ children }: PropsWithChildren) => {
 export default ErrorMessage;
 ```
 
-**Adding a spinner**
+**13. Adding a spinner**
 
 - To improve user experience we want to add the spinner when submitting the form.
 
@@ -434,7 +441,7 @@ export default Spinner;
 - import to page.tsx add to the Button component.
 - useState hook to maintain the state for displaying the spinner when submitting the form.
 
-**code organization**
+**14. code organization**
 
 - when creating the issue we may move the code in seperate file, but we only have one place creating the issue so for now let's keep it there
   // createIssue(data)
@@ -1001,10 +1008,14 @@ b. Dynamic (request time)
 
 **1- Adding a Delete Button**
 
-- In this section we are going to implete feature for delete issue.
-- Add Delete Button
+- In this section we are going to implement feature for delete issue.
+- Add Delete Button, in issues>id>DeleteIssueButton.tsx
 
 **2- Adding a Confirmation dialog box**
+
+- When delete button is clicked we need to show the conformation box.
+- we will use radix ui alert componet.
+
 **3- Building an API**
 **4- Deleting an Issue**
 **5- Handling Errors**
