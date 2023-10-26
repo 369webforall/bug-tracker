@@ -1040,6 +1040,26 @@ export async function DELETE(
 
 **4- Deleting an Issue**
 
+- Now our api is ready, to delete an issue, go to delete issue button.
+- add callback function on click.
+
+```javascript
+<Button
+  variant="solid"
+  color="red"
+  onClick={async () => {
+    await axios.delete(`/api/issues/` + issueId);
+    router.push('/issues');
+    router.refresh();
+  }}
+>
+  Delete Issue
+</Button>
+```
+
+- `import axios from 'axios';`
+- `import { useRouter } from 'next/navigation';`
+
 **5- Handling Errors**
 **6- Improving the user Experience**
 **7- Removing Duplicate Skeletons**
