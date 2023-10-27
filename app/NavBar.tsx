@@ -14,7 +14,7 @@ const NavBar = () => {
     },
     {
       id: 2,
-      href: '/issues',
+      href: '/issues/list',
       label: 'Issies',
     },
   ];

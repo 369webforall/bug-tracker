@@ -1091,6 +1091,8 @@ export async function DELETE(
 
   **7- Removing Duplicate Skeletons**
 
+  - Structure the folder in issues, so there is no over lapping with child and parent layout.
+
 # 7. Authentication (51m)
 
 # 8. Assigning Issues to Users (48m)
@@ -1100,15 +1102,3 @@ export async function DELETE(
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
