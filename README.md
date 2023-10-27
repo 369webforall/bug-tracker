@@ -1095,6 +1095,33 @@ export async function DELETE(
 
 # 7. Authentication (51m)
 
+**1. Seeting up NextAuth**
+
+- we will setup authentication using NextAuth.
+- step 1 `npm install next-auth`
+- step 2 - setup folder and file `api>auth>[...nextauth]>route.ts`
+
+```javascript
+import NextAuth from 'next-auth';
+
+const handler = NextAuth({
+  providers: [],
+});
+
+export { handler as GET, handler as POST };
+```
+
+- add two varaible as below in .env file
+
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="oj4FrEFPhG7QqkylTomy4IMqMFU3y6E2ngA8JYII92w="
+
+**2. Configuring Google Provider**
+**3. Adding the Prisma Adapter**
+**4. Adding the Login and Logout Links**
+**5. Change the layout of the Navbar**
+**6. Adding the Drop-down Menu**
+
 # 8. Assigning Issues to Users (48m)
 
 # 9. Filtering, Sorting, and Pagination (55m)
@@ -1102,3 +1129,7 @@ export async function DELETE(
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
