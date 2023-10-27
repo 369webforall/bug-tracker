@@ -1082,6 +1082,11 @@ export async function DELETE(
 - First wrap the expression in try catch block.
 
   **6- Improving the user Experience**
+
+  - add spinner, when deleting the issue.
+  - useState hook to manage the state.
+  - use delay library for delay the api for 3 second.
+
   **7- Removing Duplicate Skeletons**
 
 # 7. Authentication (51m)
