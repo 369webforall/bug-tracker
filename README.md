@@ -1060,9 +1060,29 @@ export async function DELETE(
 - `import axios from 'axios';`
 - `import { useRouter } from 'next/navigation';`
 
+```javascript
+<Button
+  variant="solid"
+  color="red"
+  onClick={async () => {
+    try {
+      await axios.delete(`/api/issues/` + issueId);
+      router.push('/issues');
+      router.refresh();
+    } catch (error) {}
+  }}
+>
+  Delete Issue
+</Button>
+```
+
 **5- Handling Errors**
-**6- Improving the user Experience**
-**7- Removing Duplicate Skeletons**
+
+- We must consider the situation for error.
+- First wrap the expression in try catch block.
+
+  **6- Improving the user Experience**
+  **7- Removing Duplicate Skeletons**
 
 # 7. Authentication (51m)
 
