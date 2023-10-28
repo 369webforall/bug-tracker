@@ -1441,6 +1441,45 @@ if (!session) return NextResponse.json({}, { status: 401 });
 
 # 8. Assigning Issues to Users (48m)
 
+- In this section we will implement the feature to assign an issue to a user.
+  **1. Building the Assignee Select Component**
+
+  - let use Select componnet form Radix ui, to select a user.
+  - issues>[id]>AssigneeSelect.tsx
+
+```javascript
+'use client';
+import { Select } from '@radix-ui/themes';
+import React from 'react';
+
+const AssigneeSelect = () => {
+  return (
+    <Select.Root>
+      <Select.Trigger placeholder="Assign..." />
+      <Select.Content>
+        <Select.Group>
+          <Select.Label>Suggestions</Select.Label>
+          <Select.Item value="1">Robert</Select.Item>
+        </Select.Group>
+        <Select.Separator />
+      </Select.Content>
+    </Select.Root>
+  );
+};
+
+export default AssigneeSelect;
+```
+
+- Then import to page in same folder and add the component above edit button.
+
+  **2. Populating the Assignee Select Component**
+  **3. Setting up React Query**
+  **4. Fetching Data with React Query**
+  **5. Add Assigned Issues to Prisma Schema**
+  **6. Implementing the API**
+  **7. Assign an Issue to a User**
+  **8. Refactoring the Assignee Select Component**
+
 # 9. Filtering, Sorting, and Pagination (55m)
 
 # 10. Dashboard (24m)
