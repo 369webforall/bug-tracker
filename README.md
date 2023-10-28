@@ -1559,6 +1559,53 @@ export default QueryClientProvider;
 ```
 
 **4. Fetching Data with React Query**
+
+- let use React Query to fetch the data now. go to AssigneeSelect.tsx file,
+  `import { useQuery } from '@tanstack/react-query';`
+- staleTime, to cache the data and revalidate after given time,
+- retry - try data fetching more time as given.
+
+  ```javascript
+  'use client';
+  import { User } from '@prisma/client';
+  import { Select } from '@radix-ui/themes';
+  import axios from 'axios';
+  import React, { useEffect, useState } from 'react';
+  import { useQuery } from '@tanstack/react-query';
+  import Skeleton from '@/app/components/Skeleton';
+  const AssigneeSelect = () => {
+  const {
+  data: users,
+  error,
+  isLoading,
+  } = useQuery<User[]>({
+  queryKey: ['users'],
+  queryFn: () => axios.get('/api/users').then((res) => res.data),
+  staleTime: 60 * 1000,
+  retry: 3,
+  });
+  if (isLoading) return <Skeleton />;
+  if (error) return null;
+  return (
+  <Select.Root>
+  <Select.Trigger placeholder="Assign..." />
+  <Select.Content>
+  <Select.Group>
+  <Select.Label>Suggestions</Select.Label>
+  {users?.map((user) => (
+  <Select.Item key={user.id} value={user.id}>
+  {user.name}
+  </Select.Item>
+  ))}
+  </Select.Group>
+  <Select.Separator />
+  </Select.Content>
+  </Select.Root>
+  );
+  };
+  export default AssigneeSelect;
+  ```
+
 **5. Add Assigned Issues to Prisma Schema**
 **6. Implementing the API**
 **7. Assign an Issue to a User**
@@ -1569,6 +1616,10 @@ export default QueryClientProvider;
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
 
 ```
 
