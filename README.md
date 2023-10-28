@@ -1375,6 +1375,70 @@ if (status === 'loading') return <Skeleton width="3rem" />;
 
 **10.Securing the Application**
 
+- We don't want anyone to access our issue page or create new issue, if so we direct them to the login page.
+- We use middleware for this, middleware function runs first and it checks if the use is logged in or not.
+- NextAuth had buidl in middle ware function.
+- In app folder add `middleware.ts` file.
+
+```javascript
+export { default } from 'next-auth/middleware';
+
+export const config = {
+  matcher: ['/issues/new', '/issues/edit/:id+'],
+};
+```
+
+- when logged in then only display update and Delete button.
+- [id]>page.tsx
+
+```javascript
+import prisma from '@/prisma/client';
+import { Box, Flex, Grid } from '@radix-ui/themes';
+import { notFound } from 'next/navigation';
+
+import EditIssueButton from './EditIssueButton';
+import DeleteIssueButton from './DeleteIssueButton';
+import IssueDetails from './IssueDetails';
+import { getServerSession } from 'next-auth';
+import authOptions from '@/app/auth/authOptions';
+interface Props {
+  params: { id: string };
+}
+const IssueDetailPage = async ({ params }: Props) => {
+  const session = await getServerSession(authOptions);
+  const issue = await prisma.issue.findUnique({
+    where: { id: params.id },
+  });
+
+  if (!issue) notFound();
+
+  return (
+    <Grid columns={{ initial: '1', sm: '5' }} gap="5">
+      <Box className="md:col-span-4">
+        <IssueDetails issue={issue} />
+      </Box>
+      <Box>
+        {session && (
+          <Flex direction="column" gap="4">
+            <EditIssueButton issueId={issue.id} />
+            <DeleteIssueButton issueId={issue.id} />
+          </Flex>
+        )}
+      </Box>
+    </Grid>
+  );
+};
+
+export default IssueDetailPage;
+```
+
+- Next we can also secure our API, psot, delete, patch
+
+```javascript
+const session = await getServerSession(authOptions);
+if (!session) return NextResponse.json({}, { status: 401 });
+```
+
 # 8. Assigning Issues to Users (48m)
 
 # 9. Filtering, Sorting, and Pagination (55m)
