@@ -1473,18 +1473,76 @@ export default AssigneeSelect;
 - Then import to page in same folder and add the component above edit button.
 
   **2. Populating the Assignee Select Component**
-  **3. Setting up React Query**
-  **4. Fetching Data with React Query**
-  **5. Add Assigned Issues to Prisma Schema**
-  **6. Implementing the API**
-  **7. Assign an Issue to a User**
-  **8. Refactoring the Assignee Select Component**
+
+  - In this section we will build the users api to fetch all users,and sort by name.
+
+  ```javascript
+  import prisma from '@/prisma/client';
+  import { NextRequest, NextResponse } from 'next/server';
+  export async function GET(request: NextRequest) {
+    const users = await prisma.user.findMany({
+      orderBy: { name: 'asc' },
+    });
+    return NextResponse.json(users, { status: 200 });
+  }
+  ```
+
+- next in [id]>AssigneeSelect.tsx
+
+```javascript
+'use client';
+import { User } from '@prisma/client';
+import { Select } from '@radix-ui/themes';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
+const AssigneeSelect = () => {
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const { data } = await axios.get<User[]>('/api/users');
+      setUsers(data);
+    };
+    fetchUsers();
+  }, []);
+  return (
+    <Select.Root>
+      <Select.Trigger placeholder="Assign..." />
+      <Select.Content>
+        <Select.Group>
+          <Select.Label>Suggestions</Select.Label>
+          {users.map((user) => (
+            <Select.Item key={user.id} value={user.id}>
+              {user.name}
+            </Select.Item>
+          ))}
+        </Select.Group>
+        <Select.Separator />
+      </Select.Content>
+    </Select.Root>
+  );
+};
+
+export default AssigneeSelect;
+```
+
+**3. Setting up React Query**
+**4. Fetching Data with React Query**
+**5. Add Assigned Issues to Prisma Schema**
+**6. Implementing the API**
+**7. Assign an Issue to a User**
+**8. Refactoring the Assignee Select Component**
 
 # 9. Filtering, Sorting, and Pagination (55m)
 
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
+
+```
+
+```
 
 ```
 
