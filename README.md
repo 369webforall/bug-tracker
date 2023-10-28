@@ -1117,10 +1117,25 @@ NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="oj4FrEFPhG7QqkylTomy4IMqMFU3y6E2ngA8JYII92w="
 
 **2. Configuring Google Provider**
-**3. Adding the Prisma Adapter**
-**4. Adding the Login and Logout Links**
-**5. Change the layout of the Navbar**
-**6. Adding the Drop-down Menu**
+
+- setup google account in console
+  [Google console](https://console.cloud.google.com/)
+- add GOOGLE_CLIENT_ID, and GOOGLE_CLIENT_SECRET to env file.
+- import `import GoogleProvider from 'next-auth/providers/google';`
+- add GoogleProvider inside providers array.
+
+```Javascript
+GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+
+```
+
+- **3. Adding the Prisma Adapter**
+  **4. Adding the Login and Logout Links**
+  **5. Change the layout of the Navbar**
+  **6. Adding the Drop-down Menu**
 
 # 8. Assigning Issues to Users (48m)
 
