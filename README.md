@@ -1148,8 +1148,40 @@ GoogleProvider({
 - so let's add ` session: { strategy: 'jwt' }`
 
   **4. Adding the Login and Logout Links**
-  **5. Change the layout of the Navbar**
-  **6. Adding the Drop-down Menu**
+
+- add login and logout link in navbar
+- `import { useSession } from 'next-auth/react';`
+
+```javascript
+<Box>
+  {status === 'authenticated' && <Link href="/api/auth/signout">Log out</Link>}
+  {status === 'unauthenticated' && <Link href="/api/auth/signin">Login</Link>}
+</Box>
+```
+
+-make sure to wrapped your main component in RootLayout in a `SessionProvider`
+
+- Because SessionProvider use react hook context API, we must create seperate file, and then expirt provider.
+  > app>auth>Provider.tsx
+
+```javascript
+'use client';
+import React, { PropsWithChildren } from 'react';
+import { SessionProvider } from 'next-auth/react';
+
+const AuthProvider = ({ children }: PropsWithChildren) => {
+  return <SessionProvider>{children}</SessionProvider>;
+};
+
+export default AuthProvider;
+```
+
+- now wrapped all the component with AuthProvider inside body.
+
+- now you can test the login and logout.
+
+**5. Change the layout of the Navbar**
+**6. Adding the Drop-down Menu**
 
 # 8. Assigning Issues to Users (48m)
 
