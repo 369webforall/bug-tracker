@@ -1821,6 +1821,111 @@ export default IssueStatusFilter;
 - call the component in IssueAction componet.
 - User Flex component to allign Both Component.
 
+**2. Filtering Issues**
+
+- To filter issues from status, we pass the status as query parameter.
+
+```javascript
+'use client';
+import { Status } from '@prisma/client';
+import { Select } from '@radix-ui/themes';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+const statuses: { label: string, value?: Status }[] = [
+  { label: 'All' },
+  { label: 'Open', value: 'OPEN' },
+  { label: 'In-Progress', value: 'IN_PROGRESS' },
+  { label: 'Closed', value: 'CLOSE' },
+];
+const IssueStatusFilter = () => {
+  const router = useRouter();
+  return (
+    <Select.Root
+      onValueChange={(status) => {
+        const query = status ? `?status=${status}` : '';
+        router.push('/issues/list' + query);
+      }}
+    >
+      <Select.Trigger placeholder="Filter by status..." />
+      <Select.Content>
+        {statuses.map((status) => (
+          <Select.Item key={status.label} value={status.value}>
+            {status.label}
+          </Select.Item>
+        ))}
+      </Select.Content>
+    </Select.Root>
+  );
+};
+
+export default IssueStatusFilter;
+```
+
+- Now query data data based on searchParamert value.
+
+```javascript
+import { Table } from '@radix-ui/themes';
+import prisma from '@/prisma/client';
+import { Link, IssueStatusBadge } from '@/app/components';
+
+import IssueActions from './IssueActions';
+import { Status } from '@prisma/client';
+interface Props {
+  searchParams: { status: Status };
+}
+
+const IssuePage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: { status },
+  });
+
+  return (
+    <div>
+      <IssueActions />
+      <Table.Root variant="surface">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Status
+            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">
+              Created
+            </Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {issues.map((issue) => (
+            <Table.Row key={issue.id}>
+              <Table.Cell>
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                <div className="block md:hidden">
+                  <IssueStatusBadge status={issue.status} />
+                </div>
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <IssueStatusBadge status={issue.status} />
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                {issue.createdAt.toDateString()}
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    </div>
+  );
+};
+
+export const dynamic = 'force-dynamic';
+
+export default IssuePage;
+```
+
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
