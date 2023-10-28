@@ -1182,7 +1182,41 @@ export default AuthProvider;
 
 **5. Change the layout of the Navbar**
 
+- use Flex component from Radix ui.
+
 **6. Adding the Drop-down Menu**
+
+- If someone is logged in we need to show beautiful avatar, and also drop down menu. where we can display email and logout link.
+- we will use Radixui component for displaying avatar.
+
+```javascript
+<Box>
+            {status === 'authenticated' && (
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Avatar
+                    src={session.user!.image!}
+                    fallback="?"
+                    size="3"
+                    radius="full"
+                    className="cursor-pointer"
+                  ></Avatar>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Label>
+                    <Text size="2">{session.user!.email}</Text>
+                  </DropdownMenu.Label>
+                  <DropdownMenu.Item>
+                    <Link href="/api/auth/signout">Log out</Link>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            )}
+            {status === 'unauthenticated' && (
+              <Link href="/api/auth/signin">Login</Link>
+            )}
+          </Box>
+```
 
 # 8. Assigning Issues to Users (48m)
 
