@@ -1751,7 +1751,37 @@ export default AssigneeSelect;
 ```
 
 - **8. Showing Toast Notification**
+- use package `react-hot-toast`
+- `npm i react-hot-toast`
+- import toast, { Toaster } from "react-hot-toast";
+- in try {} catch(error){toast.error("Change can not be saved")}
+
   **9. Refactoring the Assignee Select Component**
+
+  - extract inline function, when there is many line of code.
+
+  ```
+    const assignIssue = (userId: string) => {
+    axios
+      .patch("/api/issues/" + issue.id, {
+        assignedToUserId: userId || null,
+      })
+      .catch(() => {
+        toast.error("Changes could not be saved.");
+      });
+  };
+
+  ```
+
+```
+const useUsers = () =>
+  useQuery<User[]>({
+    queryKey: ['users'],
+    queryFn: () => axios.get('/api/users').then((res) => res.data),
+    staleTime: 60 * 1000, //60s
+    retry: 3,
+  });
+```
 
 # 9. Filtering, Sorting, and Pagination (55m)
 
