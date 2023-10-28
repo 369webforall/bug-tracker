@@ -1785,18 +1785,42 @@ const useUsers = () =>
 
 # 9. Filtering, Sorting, and Pagination (55m)
 
+**1. Building the Filter Component**
+
+- Create file IssueStatusFilter.tsx in list folder.
+
+```javascript
+'use client';
+import { Status } from '@prisma/client';
+import { Select } from '@radix-ui/themes';
+import React from 'react';
+const statuses: { label: string, value?: Status }[] = [
+  { label: 'All' },
+  { label: 'Open', value: 'OPEN' },
+  { label: 'In-Progress', value: 'IN_PROGRESS' },
+  { label: 'Closed', value: 'CLOSE' },
+];
+const IssueStatusFilter = () => {
+  return (
+    <Select.Root>
+      <Select.Trigger placeholder="Filter by status..." />
+      <Select.Content>
+        {statuses.map((status) => (
+          <Select.Item key={status.label} value={status.value}>
+            {status.label}
+          </Select.Item>
+        ))}
+      </Select.Content>
+    </Select.Root>
+  );
+};
+
+export default IssueStatusFilter;
+```
+
+- call the component in IssueAction componet.
+- User Flex component to allign Both Component.
+
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
