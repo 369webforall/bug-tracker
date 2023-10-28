@@ -1218,6 +1218,33 @@ export default AuthProvider;
           </Box>
 ```
 
+**7.Troubleshooting- Avatar not loading**
+
+- if there is issue loading Avatar then we need to add props `referrerPolicy="no-referrer"` to the Avatar component.
+
+- if still this doesn't work then we need to add below code in our next-config.js
+
+```javascript
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [{ key: 'referrer-policy', value: 'no-referrer' }],
+      },
+    ];
+  },
+};
+```
+
+- when we make change to config file make sure to restart the server.
+
+**8.Troubleshooting- Avatar not loading**
+
+**9.Troubleshooting- Avatar not loading**
+
+**10.Troubleshooting- Avatar not loading**
+
 # 8. Assigning Issues to Users (48m)
 
 # 9. Filtering, Sorting, and Pagination (55m)
