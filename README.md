@@ -1367,6 +1367,12 @@ const AuthStatus = () => {
 
 **9.Adding Loading Skeleton**
 
+- Add Skeleton componet for login button.
+
+```javascript
+if (status === 'loading') return <Skeleton width="3rem" />;
+```
+
 **10.Securing the Application**
 
 # 8. Assigning Issues to Users (48m)
