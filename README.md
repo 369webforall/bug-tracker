@@ -1133,6 +1133,20 @@ GoogleProvider({
 ```
 
 - **3. Adding the Prisma Adapter**
+- To setup prisma adapter let check the NextAuth Adapter page for prisma.
+  [Prisma Adapter](https://authjs.dev/reference/adapter/prisma)
+
+  - prisma client and @prisma/client and prisma --save-dev already installed in our system.
+
+- install `npm install @next-auth/prisma-adapter`
+
+- `npx prisma format` to format the model
+- `npx prisma db push` - it sync the schema with our database (creating database and table)
+- let test if we can login / `http://localhost:3000/api/auth/signin`
+
+- Note:- when using Adapter, NextAuth changes the stratigy from jwt to database, and it will not work with Provider like google.
+- so let's add ` session: { strategy: 'jwt' }`
+
   **4. Adding the Login and Logout Links**
   **5. Change the layout of the Navbar**
   **6. Adding the Drop-down Menu**
