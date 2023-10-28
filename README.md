@@ -1181,6 +1181,7 @@ export default AuthProvider;
 - now you can test the login and logout.
 
 **5. Change the layout of the Navbar**
+
 **6. Adding the Drop-down Menu**
 
 # 8. Assigning Issues to Users (48m)
