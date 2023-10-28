@@ -36,7 +36,7 @@ By the end of the course everyone should be confident in building fast, responsi
 - Database integration with Prisma
 - Authentication with NextAuth
 
-**Project Roadmanp**
+**Project Roadmap**
 
 - May be you thinking how to start and finish the project, which component should i build first.
 
@@ -1607,6 +1607,10 @@ export default QueryClientProvider;
   ```
 
 **5. Add Assigned Issues to Prisma Schema**
+
+- let update our Schema, to establish the relation between user and Issue when issue is assigned to a User.
+- after update run `npx prisma db push`
+
 **6. Implementing the API**
 **7. Assign an Issue to a User**
 **8. Refactoring the Assignee Select Component**
