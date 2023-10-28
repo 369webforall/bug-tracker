@@ -1611,9 +1611,92 @@ export default QueryClientProvider;
 - let update our Schema, to establish the relation between user and Issue when issue is assigned to a User.
 - after update run `npx prisma db push`
 
-**6. Implementing the API**
+  **6. Implementing the API**
+
+- Now we need to inhance our Patch API.
+- Fist crare new validation schema. It's copy of issueSchema, we have done some configuration, and add newfiled. `assignedToUserId`
+
+```javascript
+export const patchIssueSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(255).optional(),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(65535)
+    .optional(),
+  assignedToUserId: z
+    .string()
+    .min(1, 'assignedToUserId is required')
+    .max(255)
+    .optional()
+    .nullable(),
+});
+```
+
+- next step is update our route.ts in api/issues/[id],
+
+```javascript
+import authOptions from '@/app/auth/authOptions';
+import { getServerSession } from 'next-auth';
+import { patchIssueSchema } from '@/app/validationSchema';
+import prisma from '@/prisma/client';
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+  const body = await request.json();
+  const validation = patchIssueSchema.safeParse(body);
+  if (!validation.success)
+    return NextResponse.json(validation.error.format(), { status: 400 });
+  const { assignedToUserId, title, description } = body;
+  if (assignedToUserId) {
+    const user = prisma.user.findUnique({
+      where: { id: assignedToUserId },
+    });
+    if (!user) {
+      return NextResponse.json({ error: 'No user find' }, { status: 400 });
+    }
+  }
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+  if (!issue)
+    return NextResponse.json({ error: 'Invalid issue' }, { status: 404 });
+
+  const updatedIssue = await prisma.issue.update({
+    where: { id: issue.id },
+    data: {
+      title,
+      description,
+      assignedToUserId,
+    },
+  });
+
+  return NextResponse.json(updatedIssue);
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({}, { status: 401 });
+
+  const issue = await prisma.issue.findUnique({ where: { id: params.id } });
+  if (!issue)
+    return NextResponse.json({ error: 'Invalid issue' }, { status: 400 });
+
+  await prisma.issue.delete({ where: { id: params.id } });
+
+  return NextResponse.json({ message: 'Issue Deleted' }, { status: 200 });
+}
+```
+
 **7. Assign an Issue to a User**
-**8. Refactoring the Assignee Select Component**
+**8. Showing Toast Notification**
+**9. Refactoring the Assignee Select Component**
 
 # 9. Filtering, Sorting, and Pagination (55m)
 
