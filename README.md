@@ -1239,11 +1239,135 @@ const nextConfig = {
 
 - when we make change to config file make sure to restart the server.
 
-**8.Troubleshooting- Avatar not loading**
+**8.Refactoring Navbar**
 
-**9.Troubleshooting- Avatar not loading**
+- If we look at out Navbar, we have add all the code in same place and it makes difficult to maintian our our code. it's time for refactor.
 
-**10.Troubleshooting- Avatar not loading**
+- First extract the markup for Drop down menu. we will create component in same file.
+- also creart seperate component of nav link.
+- apply utilities class for color and hover.
+
+```javascript
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import { AiFillBug } from 'react-icons/ai';
+import { usePathname } from 'next/navigation';
+import classnames from 'classnames';
+import { useSession } from 'next-auth/react';
+import {
+  Box,
+  Flex,
+  Container,
+  DropdownMenu,
+  Avatar,
+  Text,
+} from '@radix-ui/themes';
+const NavBar = () => {
+  return (
+    <nav className="py-3 border-b px-5 mb-5">
+      <Container>
+        <Flex justify="between">
+          <Flex gap="3" align="center">
+            <Link href="/">
+              <AiFillBug className="text-2xl" />
+              <NavLinks />
+            </Link>
+          </Flex>
+          <AuthStatus />
+        </Flex>
+      </Container>
+    </nav>
+  );
+};
+
+export default NavBar;
+
+const NavLinks = () => {
+  const pathname = usePathname();
+
+  const links = [
+    {
+      id: 1,
+      href: '/',
+      label: 'Dashboard',
+    },
+    {
+      id: 2,
+      href: '/issues/list',
+      label: 'Issies',
+    },
+  ];
+
+  return (
+    <ul className="flex space-x-6">
+      {links.map((link) => (
+        <li key={link.id}>
+          <Link
+            href={link.href}
+            className={classnames({
+              'nav-link': true,
+              '!text-zinc-950': link.href === pathname,
+            })}
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const AuthStatus = () => {
+  const { status, data: session } = useSession();
+  if (status === 'loading') return null;
+
+  if (status === 'unauthenticated')
+    return (
+      <Link href="/api/auth/signin" className="nav-link">
+        Login
+      </Link>
+    );
+  return (
+    <Box>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session!.user!.image!}
+            fallback="?"
+            size="3"
+            radius="full"
+            className="cursor-pointer"
+            referrerPolicy="no-referrer"
+          ></Avatar>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2">{session!.user!.email}</Text>
+          </DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link href="/api/auth/signout">Log out</Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </Box>
+  );
+};
+
+```
+
+```javascript
+@layer utilities {
+  .nav-link {
+    @apply text-zinc-500 hover:text-zinc-800 transition-colors;
+  }
+}
+
+```
+
+**9.Adding Loading Skeleton**
+
+**10.Securing the Application**
 
 # 8. Assigning Issues to Users (48m)
 
