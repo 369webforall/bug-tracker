@@ -1528,6 +1528,36 @@ export default AssigneeSelect;
 ```
 
 **3. Setting up React Query**
+
+- People fetch data, using react useState hook and useEffect hook, but there are few issue when fetching data, useEffect always run after component render. no caching,
+  No error handling code, what is callto backend fails, there is no logic for retrying,Its very time consuming.
+
+- There is better way to fetch data using `React Query` or library called `TanStack Query`
+
+- `npm i @tanstack/react-query`
+- app>QueryClientProvider.tsx file
+
+```javascript
+'use client';
+import React, { PropsWithChildren } from 'react';
+import {
+  QueryClientProvider as ReactQueryClientProvider,
+  QueryClient,
+} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
+const QueryClientProvider = ({ children }: PropsWithChildren) => {
+  return (
+    <ReactQueryClientProvider client={queryClient}>
+      {children}
+    </ReactQueryClientProvider>
+  );
+};
+
+export default QueryClientProvider;
+```
+
 **4. Fetching Data with React Query**
 **5. Add Assigned Issues to Prisma Schema**
 **6. Implementing the API**
