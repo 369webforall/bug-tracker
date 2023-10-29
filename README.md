@@ -2109,6 +2109,11 @@ export const dynamic = 'force-dynamic';
 export default IssuePage;
 ```
 
+**5.Fix filtering Bug**
+
+- If we select filter our our current sort parameter disappar. to fix this we go to
+  IssueStatusFilter.tsx
+
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
