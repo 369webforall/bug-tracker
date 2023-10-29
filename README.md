@@ -1926,6 +1926,96 @@ export const dynamic = 'force-dynamic';
 export default IssuePage;
 ```
 
+**3. Making column Sortable**
+
+- As part of making these column clickable, we need a little bit of logic to make sure that sort parameter doesn't replace filter parameter.
+
+- First let's store our column in array then map that to display in bunch of header cell column.
+
+- Then we can use NextLink to wrapp the lable, and add configure the route.
+
+```javascript
+import { Table } from '@radix-ui/themes';
+import prisma from '@/prisma/client';
+import { Link, IssueStatusBadge } from '@/app/components';
+
+import NextLink from 'next/link';
+
+import IssueActions from './IssueActions';
+import { Issue, Status } from '@prisma/client';
+import { ArrowUpIcon } from '@radix-ui/react-icons';
+interface Props {
+  searchParams: { status: Status; orderBy: keyof Issue };
+}
+
+const IssuePage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: { status },
+  });
+
+  const columns: { label: string; value: keyof Issue; className?: string }[] = [
+    { label: 'Issue', value: 'title' },
+    { label: 'Status', value: 'status', className: 'hidden md:table-cell' },
+    {
+      label: 'CreatedAt',
+      value: 'createdAt',
+      className: 'hidden md:table-cell',
+    },
+  ];
+  return (
+    <div>
+      <IssueActions />
+      <Table.Root variant="surface">
+        <Table.Header>
+          <Table.Row>
+            {columns.map((column) => (
+              <Table.ColumnHeaderCell key={column.value}>
+                <NextLink
+                  href={{ query: { ...searchParams, orderBy: column.value } }}
+                >
+                  {' '}
+                  {column.label}
+                </NextLink>
+                {column.value === searchParams.orderBy && (
+                  <ArrowUpIcon className="inline" />
+                )}
+              </Table.ColumnHeaderCell>
+            ))}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {issues.map((issue) => (
+            <Table.Row key={issue.id}>
+              <Table.Cell>
+                <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                <div className="block md:hidden">
+                  <IssueStatusBadge status={issue.status} />
+                </div>
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                <IssueStatusBadge status={issue.status} />
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                {issue.createdAt.toDateString()}
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    </div>
+  );
+};
+
+export const dynamic = 'force-dynamic';
+
+export default IssuePage;
+
+```
+
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
