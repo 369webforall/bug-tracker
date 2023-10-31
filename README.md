@@ -694,6 +694,7 @@ export default IssueDetailPage;
 
 - either we can add some style to title link, so when hover styles changed
 - or let's build the custom Link componet and use Radix Link for style.
+  [Nextjs Link Componet](https://nextjs.org/docs/pages/api-reference/components/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag)
 
 ```javascript
 import React from 'react';
