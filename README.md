@@ -10,6 +10,8 @@
 
 [class-5](https://youtu.be/E9AKo0TKErA)
 
+[class-6](https://youtu.be/fQY8B5mJHUo)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
