@@ -2125,6 +2125,18 @@ export default IssuePage;
 - If we select filter our our current sort parameter disappar. to fix this we go to
   IssueStatusFilter.tsx
 
+  **6.Generate the dummy data from chatGPT**
+
+- Generate dummy data from chatgpt, use model and ask of differet title and description.
+
+  **7.Buiding the Pagination Component**
+
+  **8.Implementing Pagination**
+
+  **9. PaginatingIssues**
+
+  **10.Refactoring- Extracting issuable table component**
+
 # 10. Dashboard (24m)
 
 # 11. Going to Production (29m)
