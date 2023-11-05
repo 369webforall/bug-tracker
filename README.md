@@ -2272,4 +2272,9 @@ export default Pagination;
   - Fetch the latest issues, use flex and table to display the issue.
   - if issue is assigned to the use the display the avatar on the right side.
 
+  **1.Building the issue summary components**
+
+  - app>IssueSummary.tsx
+  - Build three card and layout horizontly.
+
 # 11. Going to Production (29m)
