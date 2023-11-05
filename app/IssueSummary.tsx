@@ -1,7 +1,7 @@
-import React from 'react';
 import { Status } from '@prisma/client';
-import { Flex, Card, Text } from '@radix-ui/themes';
+import { Card, Flex, Text } from '@radix-ui/themes';
 import Link from 'next/link';
+import React from 'react';
 
 interface Props {
   open: number;
@@ -10,19 +10,28 @@ interface Props {
 }
 
 const IssueSummary = ({ open, inProgress, closed }: Props) => {
-  const containers: { label: string; value: number; status: Status }[] = [
-    { label: 'Open Issue', value: open, status: 'OPEN' },
-    { label: 'In-Progress Issue', value: inProgress, status: 'IN_PROGRESS' },
-    { label: 'Closed Issue', value: closed, status: 'CLOSE' },
+  const containers: {
+    label: string;
+    value: number;
+    status: Status;
+  }[] = [
+    { label: 'Open Issues', value: open, status: 'OPEN' },
+    {
+      label: 'In-progress Issues',
+      value: inProgress,
+      status: 'IN_PROGRESS',
+    },
+    { label: 'Closed Issues', value: closed, status: 'CLOSE' },
   ];
+
   return (
     <Flex gap="4">
       {containers.map((container) => (
         <Card key={container.label}>
           <Flex direction="column" gap="1">
             <Link
-              href={`/issues/list?status=${container.status}`}
               className="text-sm font-medium"
+              href={`/issues/list?status=${container.status}`}
             >
               {container.label}
             </Link>
