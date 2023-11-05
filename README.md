@@ -2263,4 +2263,13 @@ export default Pagination;
 
 # 10. Dashboard (24m)
 
+- Our dashboard need three component, on the top we need summary of issues, below that we need chat and on the right side we need latest issues.
+- let's build all these components in isolation.
+
+  **1.Building the latest issue page**
+
+  - app>LatestIssues.tsx
+  - Fetch the latest issues, use flex and table to display the issue.
+  - if issue is assigned to the use the display the avatar on the right side.
+
 # 11. Going to Production (29m)
