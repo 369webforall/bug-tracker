@@ -2281,4 +2281,10 @@ export default Pagination;
 
 - [ReChart Library](https://recharts.org/en-US/)
 
+- app>IssueChart.tsx
+
+**4.Laying out the dashboard**
+
+- use grid, and flex to layout the dashboard page.
+
 # 11. Going to Production (29m)

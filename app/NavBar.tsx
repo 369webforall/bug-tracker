@@ -22,8 +22,8 @@ const NavBar = () => {
           <Flex gap="3" align="center">
             <Link href="/">
               <AiFillBug className="text-2xl" />
-              <NavLinks />
             </Link>
+            <NavLinks />
           </Flex>
           <AuthStatus />
         </Flex>
