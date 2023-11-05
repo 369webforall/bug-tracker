@@ -2288,3 +2288,5 @@ export default Pagination;
 - use grid, and flex to layout the dashboard page.
 
 # 11. Going to Production (29m)
+
+**1. Adding Metadata**
