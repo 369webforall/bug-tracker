@@ -2290,3 +2290,5 @@ export default Pagination;
 # 11. Going to Production (29m)
 
 **1. Adding Metadata**
+
+**2. Optimizing performance using react cache**
