@@ -1,7 +1,7 @@
-import LatestIssues from './LatestIssues';
-import IssueSummary from './IssueSummary';
+import LatestIssues from './issues/dashboard/LatestIssues';
+import IssueSummary from './issues/dashboard/IssueSummary';
 import prisma from '@/prisma/client';
-import IssueChart from './IssueChart';
+import IssueChart from './issues/dashboard/IssueChart';
 import { Grid, Flex } from '@radix-ui/themes';
 import type { Metadata } from 'next';
 export default async function Home() {
