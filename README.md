@@ -20,6 +20,8 @@
 
 [class-8-Auth-2](https://youtu.be/16oqQFGM30c)
 
+[class-8-Auth-3](https://youtu.be/9iPDVs89-iM)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
