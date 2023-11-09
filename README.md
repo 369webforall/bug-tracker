@@ -22,6 +22,8 @@
 
 [class-8-Auth-3](https://youtu.be/9iPDVs89-iM)
 
+[class-9-Assign Issue-1](https://youtu.be/Wlj9GYuMVug)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
