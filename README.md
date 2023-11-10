@@ -24,6 +24,10 @@
 
 [class-9-Assign Issue-1](https://youtu.be/Wlj9GYuMVug)
 
+[class-10-Assign Issue-2](https://youtu.be/fcLIpe2UfWc)
+
+[class-10-Assign Issue-3](https://youtu.be/mmjTk05mrDw)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
