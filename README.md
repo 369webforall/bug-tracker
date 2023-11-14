@@ -30,7 +30,7 @@
 
 [class-11-Filter - 1](https://youtu.be/uJo7MGq6k1Y)
 
-[class-11-Filter - 2](https://youtu.be/VBCEd6rVqKI)
+[class-12-Filter - 2](https://youtu.be/VBCEd6rVqKI)
 
 # 1. Introduction (10m)
 
