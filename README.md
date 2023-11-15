@@ -32,6 +32,8 @@
 
 [class-12-Filter - 2](https://youtu.be/VBCEd6rVqKI)
 
+[class-13-Pagination](https://youtu.be/CybZMdoQkMo)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
