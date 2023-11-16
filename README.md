@@ -34,6 +34,8 @@
 
 [class-13-Pagination](https://youtu.be/CybZMdoQkMo)
 
+[class-14-Dashboard and hosting](https://youtu.be/5Y-u5eIXAns)
+
 # 1. Introduction (10m)
 
 Build a full-stack production-grade application Issue-tracker
